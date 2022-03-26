@@ -1,88 +1,78 @@
 const quizData = [
     {
-        Question: "Which is the language that runs in a web browser",
-        A: "Java",
-        B: "C",
-        C: "Python",
-        D: "Javascript",
-
-        correct: "D",
-
+        question: "Which language runs in a web browser?",
+        a: "Java",
+        b: "C",
+        c: "Python",
+        d: "JavaScript",
+        correct: "d",
     },
     {
-        Question: "What does CSS stands for ",
-        A: "Central style sheet",
-        B: "Cascading Style sheet",
-        C: " Cascading simple sheets",
-        D: " Cars Sandals Slider",
-
-        correct: "B",
+        question: "What does CSS stand for?",
+        a: "Central Style Sheets",
+        b: "Cascading Style Sheets",
+        c: "Cascading Simple Sheets",
+        d: "Cars SUVs Sailboats",
+        correct: "b",
     },
     {
-        Question: "What does HTML stands for",
-        A: "Hypertext Mark up language",
-        B: "Hypertext Markdown language",
-        C: "HyperLoop machine language",
-        D: "Helicopter Terminal Machine landers",
-
-        correct: "A",
+        question: "What does HTML stand for?",
+        a: "Hypertext Markup Language",
+        b: "Hypertext Markdown Language",
+        c: "Hyperloop Machine Language",
+        d: "Helicopters Terminals Motorboats Lamborginis",
+        correct: "a",
     },
     {
-        Question: "Which year was Javascript Found",
-        A: "1979",
-        B: "1995",
-        C: "1963",
-        D: "None of the above",
-
-        correct: "B",
-    }
+        question: "What year was JavaScript launched?",
+        a: "1996",
+        b: "1995",
+        c: "1994",
+        d: "none of the above",
+        correct: "b",
+    },
 ];
-const quiz = document.getElementById('quiz');
-const answerElements = document.querySelector(".answer");
-const questionElement = document.getElementById('question');
-const a_text = document.getElementById('a_text');
-const b_text = document.getElementById('b_text');
-const c_text = document.getElementById('c_text');
-const d_text = document.getElementById('d_text');
-const submitButton = document.getElementById('submit');
-
+const quiz = document.getElementById("quiz");
+const answerElements = document.querySelectorAll(".answer");
+const questionElement = document.getElementById("question");
+const a_text = document.getElementById("a_text");
+const b_text = document.getElementById("b_text");
+const c_text = document.getElementById("c_text");
+const d_text = document.getElementById("d_text");
+const submitButton = document.getElementById("submit");
 let currentQuiz = 0;
 let score = 0;
-
 const deselectAnswers = () => {
-    
-    answerElements.forEach((answerElement) => (answerElement.checked = false));
-
+    answerElements.forEach((answer) => (answer.checked = false));
 };
 const getSelected = () => {
     let answer;
-    answerElements.forEach((answerElement)=> {
-        if(answerElement.checked)answer = answerElement.id;
+    answerElements.forEach((answerElement) => {
+        if (answerElement.checked) answer = answerElement.id;
     });
     return answer;
-}
-const loadQuiz = () =>{
+};
+const loadQuiz = () => {
     deselectAnswers();
     const currentQuizData = quizData[currentQuiz];
-    questionElement.innerText = currentQuizData.Question;
-    a_text.innerText = currentQuizData.A;
-    b_text.innerText = currentQuizData.B;
-    c_text.innerText = currentQuizData.C;
-    d_text.innerText = currentQuizData.D;
+    questionElement.innerText = currentQuizData.question;
+    a_text.innerText = currentQuizData.a;
+    b_text.innerText = currentQuizData.b;
+    c_text.innerText = currentQuizData.c;
+    d_text.innerText = currentQuizData.d;
 };
-
 loadQuiz();
-
-submitButton.addEventListener("click", ()=>{
+submitButton.addEventListener("click", () => {
     const answer = getSelected();
-    if(answer){
-        if(answer== quizData[currentQuiz].correct) score ++;
+    if (answer) {
+        if (answer === quizData[currentQuiz].correct) score++;
         currentQuiz++;
-        if(currentQuiz<quizData.length) loadQuiz();
-    else{
-        quiz.innerHTML = `<h2>You answered ${score}/${quizData.length} questions correctly</h2>
-        <button onclick = "history.go(0)">Play Again</button>`
-        // locat
+        if (currentQuiz < quizData.length) loadQuiz();
+        else {
+            quiz.innerHTML = `  
+       <h2>You answered ${score}/${quizData.length} questions correctly</h2>  
+       <button onclick="history.go(0)">Play Again</button>  
+     ` // location.reload() won't work in CodePen for security reasons;  
+        }
     }
-    }
-});
+});  
