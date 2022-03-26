@@ -39,7 +39,7 @@ const quizData = [
 ];
 const quiz = document.getElementById('quiz');
 const answerElements = document.querySelector(".answer");
-const questionElements = document.getElementById('question');
+const questionElement = document.getElementById('question');
 const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
 const c_text = document.getElementById('c_text');
@@ -50,12 +50,13 @@ let currentQuiz = 0;
 let score = 0;
 
 const deselectAnswers = () => {
-    answerElements.forEach((answer) => (answer.checked = false));
+    
+    answerElements.forEach((answerElement) => (answerElement.checked = false));
 
 };
 const getSelected = () => {
     let answer;
-    answerElements.forEach((answerElements)=> {
+    answerElements.forEach((answerElement)=> {
         if(answerElement.checked)answer = answerElement.id;
     });
     return answer;
@@ -63,12 +64,13 @@ const getSelected = () => {
 const loadQuiz = () =>{
     deselectAnswers();
     const currentQuizData = quizData[currentQuiz];
-    questionElements.innerText = currentQuizData.Question;
+    questionElement.innerText = currentQuizData.Question;
     a_text.innerText = currentQuizData.A;
     b_text.innerText = currentQuizData.B;
     c_text.innerText = currentQuizData.C;
     d_text.innerText = currentQuizData.D;
 };
+
 loadQuiz();
 
 submitButton.addEventListener("click", ()=>{
